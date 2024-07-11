@@ -55,7 +55,7 @@ header {
     border: none;
     cursor: pointer;
     font-size: 1.2em;
-    margin: 20px auto; /* Centrar el botón horizontalmente */
+    margin: 60px auto 20px auto; /* Centrar el botón horizontalmente */
   }
 
 .filter-container {
