@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(30,30,30);
+    margin: 0;
+    padding-top: 60px; /* Añade padding para el espacio del header fijo */
+
+}
+
+header {
+    background-color:#08090c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-left: 20px;
+}
+
+.header-right {
+    font-size: 1.5em;
+    margin-right: 20px;
+}
+
+.container {
+    display: flex;
+    margin-bottom: 60px; /* Añade margen inferior para el espacio del footer fijo */
+}
+
+.filter-container {
+    width: 250px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.filter-group h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.filter-group ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.filter-group ul li {
+    margin-bottom: 10px;
+}
+
+.filter-group ul li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.filter-group ul li a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.job {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Permite posicionar elementos hijos de forma absoluta */
+}
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.job-date {
+    font-size: 0.9em;
+    color: #666;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.job-details {
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.job-details:hover {
+    text-decoration: underline;
+}
+
+
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
