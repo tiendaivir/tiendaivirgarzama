@@ -45,6 +45,19 @@ header {
     margin-bottom: 60px; /* Añade margen inferior para el espacio del footer fijo */
 }
 
+.filter-toggle {
+    display: block; /* Cambiar a block para permitir el centrado */
+    width: auto; /* Ajustar el ancho automáticamente */
+    padding: 10px 20px; /* Añadir relleno horizontal para un tamaño mediano */
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 20px auto; /* Centrar el botón horizontalmente */
+  }
+
 .filter-container {
     width: 250px;
     background-color: #fff;
@@ -131,3 +144,21 @@ footer {
     padding: 20px;
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+  
+    .filter-toggle {
+        display: block;
+    }
+  
+    .filter-container {
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+        display: none;
+    }
+  }
+  
