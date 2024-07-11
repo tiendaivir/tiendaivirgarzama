@@ -17,7 +17,7 @@ body {
 header {
     background-color:#08090c;
     color: white;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     position: fixed;
     top: 0;
@@ -48,7 +48,7 @@ header {
 .filter-toggle {
     display: block; /* Cambiar a block para permitir el centrado */
     width: auto; /* Ajustar el ancho automáticamente */
-    padding: 10px 20px; /* Añadir relleno horizontal para un tamaño mediano */
+    padding: 10px 5px; /* Añadir relleno horizontal para un tamaño mediano */
     text-align: center;
     background-color: #007bff;
     color: white;
