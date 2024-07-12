@@ -25,5 +25,46 @@ document.addEventListener('DOMContentLoaded', () => {
         job.style.display = job.classList.contains(type) ? 'block' : 'none';
       }
     });
-  }
+        // Ocultar el contenedor de filtros en dispositivos móviles después de seleccionar una opción
+        if (window.innerWidth <= 768) {
+          document.querySelector('.filter-container').style.display = 'none';
+          document.querySelector('.filter-toggle').style.display = 'block';
+      }
+    }
+  
+     // Función para alternar la visibilidad del contenedor de filtros en dispositivos móviles
+     document.querySelector('.filter-toggle').addEventListener('click', function() {
+      const filterContainer = document.querySelector('.filter-container');
+      if (filterContainer.style.display === 'block') {
+          filterContainer.style.display = 'none';
+      } else {
+          filterContainer.style.display = 'block';
+      }
+  });
+  
+  // Restaurar la visibilidad del contenedor de filtros en dispositivos más grandes
+  window.addEventListener('resize', function() {
+      const filterContainer = document.querySelector('.filter-container');
+      const filterToggle = document.querySelector('.filter-toggle');
+      if (window.innerWidth > 768) {
+          filterContainer.style.display = 'block';
+          filterToggle.style.display = 'none';
+      } else {
+          filterContainer.style.display = 'none';
+          filterToggle.style.display = 'block';
+      }
+  });
+  
+  // Inicializar la visibilidad correcta al cargar la página
+  window.addEventListener('load', function() {
+      const filterContainer = document.querySelector('.filter-container');
+      const filterToggle = document.querySelector('.filter-toggle');
+      if (window.innerWidth > 768) {
+          filterContainer.style.display = 'block';
+          filterToggle.style.display = 'none';
+      } else {
+          filterContainer.style.display = 'none';
+          filterToggle.style.display = 'block';
+      }
+  });
   
