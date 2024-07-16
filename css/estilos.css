@@ -221,13 +221,42 @@ html {
   }
   
   .hero h2 {
-    font-size: 2.5em; 
-    color: #ff6600; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-    transform: perspective(500px) rotateX(20deg);
-    margin: 10px 0; 
-  }
-  
+    font-size: 5rem;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: Khaki;
+    -webkit-text-stroke: 2px brown;
+    text-shadow: 1px 1px 5px brown;
+    position: relative;
+    line-height: 80%;
+    }
+    
+    .bubble {
+    aspect-ratio: 1/1;
+    border-radius: 75% 0 75% 0;
+    background-color: brown;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 100%;
+    opacity: 0;
+    animation: drip 4s ease-in infinite;
+    }
+    
+    @keyframes drip {
+    25% { 
+    opacity: 1; 
+    }
+    75% { 
+    opacity: 1; 
+    }
+    100% {
+    bottom: -2rem; 
+    opacity: 0;
+    transform: rotate(360deg);
+    }
+    }
 
 /* Reglas específicas para pantallas pequeñas */
 @media (max-width: 600px) {
@@ -289,9 +318,9 @@ html {
     /*position: relative;*/
     align-items: center;
     transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
-    0 0  0 2px rgb(24, 23, 23),
-    0.3em 0.3em 1em rgba(0,0,0,0.3);
+    box-shadow: inset 0 -3em 3em rgba(122, 121, 121, 0.1),
+    0 0  0 2px rgb(124, 119, 119),
+    0.3em 0.3em 1em rgba(141, 139, 139, 0.3);
 }
 
 #nuestros-programas .carta h3 {
@@ -538,34 +567,66 @@ html {
 
 /*footer*/
 
-
-.pie-pagina{
-    margin-top: 2rem;
-    background-color: rgb(20,20,20);
-    padding: 2rem;
-}
-@media(min-width:768px){
-    .contenedor-piepagina{
-        display: flex;
-        justify-content: space-between;
-    }
-
-}
-.info{
-    flex: 0 0 calc(33%);
-    margin-bottom: 2rem;
-}
-.info h3, .info p{
-    color: var(--blanco);
-    text-align: center;
-}
-.info h3{
-    font-size: 2.2rem;
-}
-.info p{
-    font-size: 1.8rem;
+.pie-pagina {
+  margin-top: 1.5rem;
+  background-color: rgb(20, 20, 20);
+  padding: 1.5rem;
 }
 
-.redes-pie{
-    text-align: center;
+.contenedor-piepagina {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 80%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.info {
+  flex: 0 0 calc(100%);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.info a {
+  display: block;  
+  color: #fff;
+  text-decoration: none;  
+  font-size: 2rem;  
+  margin: 0.5rem 0;  
+}
+.info a:hover{
+  color: blue;
+}
+.info h3, .info p {
+  color: #fff;
+  text-align: center;
+}
+
+.info h3 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.info p {
+  font-size: 1.8rem;
+}
+
+@media(min-width: 768px) {
+  .contenedor-piepagina {
+      flex-direction: row;
+      justify-content: space-between;
+  }
+
+  .info {
+      flex: 0 0 calc(33%);
+      text-align: left;
+  }
+
+  .logo {
+      margin-bottom: 0;
+  }
 }

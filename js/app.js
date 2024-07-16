@@ -55,3 +55,20 @@ const cerrarMenu = (boton, overlay) => {
     boton.remove();
   };
 };
+/*h2 de hero*/
+document.addEventListener("DOMContentLoaded", function() {
+  let h2 = document.querySelector(".hero h2"),
+      h2_width = h2.getBoundingClientRect().width;
+
+  function addBubbles() {
+      for (var i = 0; i < h2_width / 15; i++) {
+          let b = document.createElement("div");
+          b.className = "bubble";
+          b.style.width = Math.random() < 0.5 ? "20px" : "10px";
+          b.style.left = Math.random() * (h2_width - 20) + "px";
+          b.style.animationDelay = 4 * Math.random() + "s";
+          h2.appendChild(b);
+      }
+  }
+  addBubbles();
+});
