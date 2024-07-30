@@ -227,8 +227,8 @@ html {
     font-weight: 900;
     text-transform: uppercase;
     color: Khaki;
-    -webkit-text-stroke: 2px brown;
-    text-shadow: 1px 1px 5px brown;
+    -webkit-text-stroke: 2px rgb(157, 165, 42);
+    text-shadow: 1px 1px 5px rgb(165, 108, 42);
     position: relative;
     line-height: 80%;
     }
@@ -236,7 +236,7 @@ html {
     .bubble {
     aspect-ratio: 1/1;
     border-radius: 75% 0 75% 0;
-    background-color: brown;
+    background-color: rgb(156, 132, 22);
     box-sizing: border-box;
     position: absolute;
     bottom: 100%;
