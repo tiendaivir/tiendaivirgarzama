@@ -47,6 +47,7 @@ header {
 .container {
     display: flex;
     margin-bottom: 60px; /* Añade margen inferior para el espacio del footer fijo */
+    flex-wrap: nowrap; /* Prevent line wrapping */
 }
 .filter-toggle {
     display: block; /* Cambiar a block para permitir el centrado */
@@ -85,6 +86,13 @@ header {
     margin: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.filter-container {
+    position: sticky; /* Keep it fixed when scrolling */
+    top: 80px; /* Adjust top according to your header height */
+    max-height: calc(100vh - 100px); /* Adjust maximum height */
+    overflow-y: auto; /* Add scroll inside the aside if needed */
 }
 
 h2 {
@@ -119,6 +127,8 @@ h2 {
 .content {
     flex-grow: 1;
     padding: 20px;
+    min-width: 0; /* Prevent content from growing the container */
+    overflow-x: hidden; /* Hide overflow if necessary */
 }
 
 .job {
