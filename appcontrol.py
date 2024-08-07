@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 import git
-#import os
 import sqlite3
 import datetime
 import threading
@@ -160,6 +159,7 @@ class JobApp:
         self.clean_expired_ads()
         query = "SELECT fechainicio, fechainicio, tipo, titulo, anuncio, detalles FROM product"
         db_rows = self.run_query(query)
+
         # Crear el contenido de los anuncios
         ads_content = ""
         for row in db_rows:
@@ -174,24 +174,35 @@ class JobApp:
             </div>
             """
 
-        # Añadir el anuncio al archivo HTML
+        # Sobrescribir la sección de anuncios en el archivo HTML
         HTML_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.html"
         with open(HTML_FILE_PATH, "r+") as file:
             content = file.read()
+            start_marker = "<!-- aquí deben introducirse los anuncios -->"
+            end_marker = "<!-- fin de anuncios -->"
+
+            # Dividir el contenido en dos partes, antes y después de los anuncios
+            before_ads = content.split(start_marker)[0]
+            after_ads = content.split(end_marker)[1]
+
+            # Crear el nuevo contenido del archivo
+            new_content = f"{before_ads}{start_marker}\n{ads_content}\n{end_marker}{after_ads}"
+
+            # Escribir el nuevo contenido y truncar cualquier contenido sobrante
             file.seek(0)
-            updated_content = content.split("<!-- aquí deben introducirse los anuncios -->")
-            file.write(f"{updated_content[0]}<!-- aquí deben introducirse los anuncios -->\n{ads_content}\n{updated_content[1]}")
-        
+            file.write(new_content)
+            file.truncate()
+
         # Automatización de Git
         GIT_REPO_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama"
         GIT_REMOTE_NAME = "origin"
         GIT_BRANCH_NAME = "main"
         repo = git.Repo(GIT_REPO_PATH)
         repo.git.add(HTML_FILE_PATH)
-        repo.index.commit("Actualizado el archivo HTML con los anuncios actuales")
+        repo.index.commit("Actualización de anuncios desde la base de datos")
         repo.git.push(GIT_REMOTE_NAME, GIT_BRANCH_NAME)
 
-        messagebox.showinfo("Éxito", "Archivo HTML actualizado exitosamente con anuncios actuales")
+        messagebox.showinfo("Éxito", "Archivo HTML actualizado exitosamente")
 
 if __name__ == '__main__':
     # Inicia la limpieza periódica en un hilo separado
