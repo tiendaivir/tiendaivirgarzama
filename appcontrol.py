@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
 import git
-import os
+#import os
 import sqlite3
 import datetime
 import threading
