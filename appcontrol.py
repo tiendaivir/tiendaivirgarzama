@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import messagebox, ttk, simpledialog
 import git
 import sqlite3
 import datetime
@@ -32,8 +32,11 @@ class JobApp:
 
         # Tipo de anuncio Input
         tk.Label(frame, text='Tipo de anuncio*: ').grid(row=3, column=0)
-        self.tipo = tk.Entry(frame)
+        self.tipo = ttk.Combobox(frame, values=["parttime", "freelance", "albañil", "Agregar tipo..."], state="readonly")
         self.tipo.grid(row=3, column=1)
+        self.tipo.bind("<<ComboboxSelected>>", self.on_type_selected)
+
+
 
         # Título del anuncio Input
         tk.Label(frame, text='Título del anuncio: ').grid(row=4, column=0)
@@ -93,6 +96,14 @@ class JobApp:
         for row in db_rows:
             self.tree.insert('', 0, text=row[1], values=(row[2], row[3], row[4]))
 
+    def on_type_selected(self, event):
+        if self.tipo.get() == "Agregar tipo...":
+            new_type = tk.simpledialog.askstring("Nuevo tipo de anuncio", "Ingrese el nuevo tipo de anuncio:")
+            if new_type:
+                new_type = new_type.replace(" ", "_")
+                self.tipo['values'] = list(self.tipo['values'])[:-1] + [new_type, "Agregar tipo..."]
+                self.tipo.set(new_type)
+
     def validate_date_format(self, date_text):
         try:
             datetime.datetime.strptime(date_text, '%Y-%m-%d')
@@ -121,7 +132,7 @@ class JobApp:
             self.message['text'] = 'Anuncio {} agregado satisfactoriamente'.format(self.titulo.get())
             self.fechainicio.delete(0, tk.END)
             self.fechaconclution.delete(0, tk.END)
-            self.tipo.delete(0, tk.END)
+            self.tipo.set("")
             self.titulo.delete(0, tk.END)
             self.anuncio.delete(0, tk.END)
             self.detalles.delete(0, tk.END)
@@ -154,55 +165,104 @@ class JobApp:
             time.sleep(3600) # Espera 1 hora
 
     # Método para actualizar el archivo HTML basado en la base de datos
-    def update_html_file(self):
-        # Limpieza de anuncios expirados antes de actualizar el HTML
-        self.clean_expired_ads()
-        query = "SELECT fechainicio, fechainicio, tipo, titulo, anuncio, detalles FROM product"
-        db_rows = self.run_query(query)
+def update_html_file(self):
+    # Limpieza de anuncios expirados antes de actualizar el HTML
+    self.clean_expired_ads()
+    
+    # Obtener los tipos de anuncios y la cantidad de cada uno
+    query = """
+    SELECT tipo, COUNT(*) as count
+    FROM product
+    GROUP BY tipo
+    """
+    db_rows = self.run_query(query)
+    
+    # Crear el contenido de los filtros de búsqueda y actualizar los contadores
+    filter_items = ""
+    js_update_counts = "function updateCounts() {\n"
+    for row in db_rows:
+        tipo = row[0]
+        count = row[1]
+        if count > 0:
+            filter_items += f'<li><a href="#" onclick="filterJobs(\'{tipo}\')">{tipo.replace("_", " ").capitalize()} <span id="{tipo}-count"></span></a></li>\n'
+            js_update_counts += f'const {tipo}Jobs = document.querySelectorAll(\'.job.{tipo}\').length;\n'
+            js_update_counts += f'document.getElementById(\'{tipo}-count\').textContent = `(${tipo}Jobs)`;\n'
 
-        # Crear el contenido de los anuncios
-        ads_content = ""
-        for row in db_rows:
-            ads_content += f"""
-            <div class="job {row[2]}">
-                <div class="job-header">
-                    <h4>{row[3]}</h4>
-                    <span class="job-date">Publicado: {row[0]}</span>
-                </div>
-                <p>{row[4]}</p>
-                <a href="{row[5]}" class="job-details">Ver detalles</a>
-            </div>
-            """
+    # Completar la función de actualización de contadores en JavaScript
+    js_update_counts += "}\n"
+    
+    # Crear el contenido de los anuncios
+    query = "SELECT fechainicio, fechainicio, tipo, titulo, anuncio, detalles FROM product"
+    db_rows = self.run_query(query)
 
-        # Sobrescribir la sección de anuncios en el archivo HTML
-        HTML_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.html"
-        with open(HTML_FILE_PATH, "r+") as file:
-            content = file.read()
-            start_marker = "<!-- aquí deben introducirse los anuncios -->"
-            end_marker = "<!-- fin de anuncios -->"
+    ads_content = ""
+    for row in db_rows:
+        ads_content += f"""
+        <div class="job {row[2]}">
+        <div class="job-header">
+        <h4>{row[3]}</h4>
+        <span class="job-date">Publicado: {row[0]}</span>
+        </div>
+        <p>{row[4]}</p>
+        <a href="{row[5]}" class="job-details">Ver detalles</a>
+        </div>
+        """
 
-            # Dividir el contenido en dos partes, antes y después de los anuncios
-            before_ads = content.split(start_marker)[0]
-            after_ads = content.split(end_marker)[1]
+    # Sobrescribir la sección de filtros y anuncios en el archivo HTML
+    HTML_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.html"
+    with open(HTML_FILE_PATH, "r+") as file:
+        content = file.read()
+        start_filter_marker = "<!-- inicio de filtros -->"
+        end_filter_marker = "<!-- fin de filtros -->"
+        start_ads_marker = "<!-- aquí deben introducirse los anuncios -->"
+        end_ads_marker = "<!-- fin de anuncios -->"
 
-            # Crear el nuevo contenido del archivo
-            new_content = f"{before_ads}{start_marker}\n{ads_content}\n{end_marker}{after_ads}"
+        # Dividir el contenido en las partes necesarias
+        before_filters = content.split(start_filter_marker)[0]
+        after_filters = content.split(end_filter_marker)[1].split(start_ads_marker)[0]
+        after_ads = content.split(end_ads_marker)[1]
 
-            # Escribir el nuevo contenido y truncar cualquier contenido sobrante
-            file.seek(0)
-            file.write(new_content)
-            file.truncate()
+        # Crear el nuevo contenido del archivo
+        new_content = f"{before_filters}{start_filter_marker}\n<ul>\n{filter_items}</ul>\n{end_filter_marker}\n{after_filters}{start_ads_marker}\n{ads_content}\n{end_ads_marker}{after_ads}"
 
-        # Automatización de Git
-        GIT_REPO_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama"
-        GIT_REMOTE_NAME = "origin"
-        GIT_BRANCH_NAME = "main"
-        repo = git.Repo(GIT_REPO_PATH)
-        repo.git.add(HTML_FILE_PATH)
-        repo.index.commit("Actualización de anuncios desde la base de datos")
-        repo.git.push(GIT_REMOTE_NAME, GIT_BRANCH_NAME)
+        # Escribir el nuevo contenido y truncar cualquier contenido sobrante
+        file.seek(0)
+        file.write(new_content)
+        file.truncate()
 
-        messagebox.showinfo("Éxito", "Archivo HTML actualizado exitosamente")
+    # Actualizar el JavaScript en el archivo
+    JS_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.js"
+    with open(JS_FILE_PATH, "r+") as js_file:
+        js_content = js_file.read()
+        start_js_marker = "function updateCounts() {"
+        end_js_marker = "}"
+
+        # Dividir el contenido del JavaScript
+        before_js = js_content.split(start_js_marker)[0]
+        after_js = js_content.split(end_js_marker)[1]
+
+        # Crear el nuevo contenido del archivo JS
+        new_js_content = f"{before_js}{js_update_counts}{after_js}"
+
+        # Escribir el nuevo contenido del archivo JS
+        js_file.seek(0)
+        js_file.write(new_js_content)
+        js_file.truncate()
+
+    # Automatización de Git
+    GIT_REPO_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama"
+    GIT_REMOTE_NAME = "origin"
+    GIT_BRANCH_NAME = "main"
+    repo = git.Repo(GIT_REPO_PATH)
+    repo.git.add(HTML_FILE_PATH)
+    repo.git.add(JS_FILE_PATH)
+    repo.index.commit("Actualización de anuncios y filtros desde la base de datos")
+    repo.git.push(GIT_REMOTE_NAME, GIT_BRANCH_NAME)
+
+    messagebox.showinfo("Éxito", "Archivo HTML y JavaScript actualizados exitosamente")
+
+
+
 
 if __name__ == '__main__':
     # Inicia la limpieza periódica en un hilo separado
