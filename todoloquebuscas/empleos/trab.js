@@ -3,17 +3,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   function updateCounts() {
+    // aqui se agregan los nuevos tipos
     const allJobs = document.querySelectorAll('.job').length;
     const fulltimeJobs = document.querySelectorAll('.job.fulltime').length;
     const parttimeJobs = document.querySelectorAll('.job.parttime').length;
     const freelanceJobs = document.querySelectorAll('.job.freelance').length;
     const albañilJobs = document.querySelectorAll('.job.albañil').length;
+    const nuevo_empleoJobs = document.querySelectorAll('.job.nuevo_empleo').length;
   
     document.getElementById('all-count').textContent = `(${allJobs})`;
     document.getElementById('fulltime-count').textContent = `(${fulltimeJobs})`;
     document.getElementById('parttime-count').textContent = `(${parttimeJobs})`;
     document.getElementById('freelance-count').textContent = `(${freelanceJobs})`;
     document.getElementById('albañil-count').textContent = `(${albañilJobs})`;
+    document.getElementById('nuevo_empleo-count').textContent = `(${nuevo_empleoJobs})`;
+    // fin de los nuevos tipos
   }
   
   function filterJobs(type) {
