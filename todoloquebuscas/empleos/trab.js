@@ -8,18 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
      // aquí se agregan los nuevos tipos
 const parttimeJobs = document.querySelectorAll('.job.parttime').length;
 document.getElementById('parttime-count').textContent = `(${parttimeJobs})`;
-const freelanceJobs = document.querySelectorAll('.job.freelance').length;
-document.getElementById('freelance-count').textContent = `(${freelanceJobs})`;
-const fulltimeJobs = document.querySelectorAll('.job.fulltime').length;
-document.getElementById('fulltime-count').textContent = `(${fulltimeJobs})`;
 const albañilJobs = document.querySelectorAll('.job.albañil').length;
 document.getElementById('albañil-count').textContent = `(${albañilJobs})`;
 const dfdJobs = document.querySelectorAll('.job.dfd').length;
 document.getElementById('dfd-count').textContent = `(${dfdJobs})`;
 const asi_es_loJobs = document.querySelectorAll('.job.asi_es_lo').length;
 document.getElementById('asi_es_lo-count').textContent = `(${asi_es_loJobs})`;
-const nuevo_tipoJobs = document.querySelectorAll('.job.nuevo_tipo').length;
-document.getElementById('nuevo_tipo-count').textContent = `(${nuevo_tipoJobs})`;
 // fin de los nuevos tipos
   }
   
