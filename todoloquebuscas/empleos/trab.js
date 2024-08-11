@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   function updateCounts() {
+    const allJobs = document.querySelectorAll('.job').length;
+    document.getElementById('all-count').textContent = `(${allJobs})`;
      // aquí se agregan los nuevos tipos
 const parttimeJobs = document.querySelectorAll('.job.parttime').length;
 document.getElementById('parttime-count').textContent = `(${parttimeJobs})`;
