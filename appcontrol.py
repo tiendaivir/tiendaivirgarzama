@@ -20,13 +20,13 @@ class JobApp:
         frame.grid(row=0, column=0, columnspan=3, pady=30)
 
         # Fecha de publicación Input
-        tk.Label(frame, text='Fecha de Publicación* (YYYY-MM-DD)*: ').grid(row=1, column=0)
+        tk.Label(frame, text='Fecha de Publicación (YYYY-MM-DD)*: ').grid(row=1, column=0)
         self.fechainicio = tk.Entry(frame)
         self.fechainicio.focus()
         self.fechainicio.grid(row=1, column=1)
 
         # Fecha de conclusión Input
-        tk.Label(frame, text='Fecha de Conclución* (YYYY-MM-DD)*: ').grid(row=2, column=0)
+        tk.Label(frame, text='Fecha de Conclusión (YYYY-MM-DD)*: ').grid(row=2, column=0)
         self.fechaconclution = tk.Entry(frame)
         self.fechaconclution.grid(row=2, column=1)
 
@@ -35,8 +35,6 @@ class JobApp:
         self.tipo = ttk.Combobox(frame, values=["parttime", "freelance", "albañil", "Agregar tipo..."], state="readonly")
         self.tipo.grid(row=3, column=1)
         self.tipo.bind("<<ComboboxSelected>>", self.on_type_selected)
-
-
 
         # Título del anuncio Input
         tk.Label(frame, text='Título del anuncio: ').grid(row=4, column=0)
@@ -117,7 +115,7 @@ class JobApp:
             messagebox.showerror("Error", "La Fecha de Publicación debe estar en el formato YYYY-MM-DD")
             return False
         if not self.validate_date_format(self.fechaconclution.get()):
-            messagebox.showerror("Error", "La Fecha de Conclución debe estar en el formato YYYY-MM-DD")
+            messagebox.showerror("Error", "La Fecha de Conclusión debe estar en el formato YYYY-MM-DD")
             return False
         if len(self.tipo.get()) == 0 or len(self.anuncio.get()) == 0:
             messagebox.showerror("Error", "Los campos con * son obligatorios")
@@ -165,112 +163,78 @@ class JobApp:
             time.sleep(3600) # Espera 1 hora
 
     # Método para actualizar el archivo HTML basado en la base de datos
-def update_html_file(self):
-    # Limpieza de anuncios expirados antes de actualizar el HTML
-    self.clean_expired_ads()
-    
-    # Obtener los tipos de anuncios y la cantidad de cada uno
-    query = """
-    SELECT tipo, COUNT(*) as count
-    FROM product
-    GROUP BY tipo
-    """
-    db_rows = self.run_query(query)
-    
-    # Crear el contenido de los filtros de búsqueda y actualizar los contadores
-    filter_items = ""
-    js_update_counts = "function updateCounts() {\n"
-    for row in db_rows:
-        tipo = row[0]
-        count = row[1]
-        if count > 0:
-            filter_items += f'<li><a href="#" onclick="filterJobs(\'{tipo}\')">{tipo.replace("_", " ").capitalize()} <span id="{tipo}-count"></span></a></li>\n'
-            js_update_counts += f'const {tipo}Jobs = document.querySelectorAll(\'.job.{tipo}\').length;\n'
-            js_update_counts += f'document.getElementById(\'{tipo}-count\').textContent = `(${tipo}Jobs)`;\n'
+    def update_html_file(self):
+        # Limpieza de anuncios expirados antes de actualizar el HTML
+        self.clean_expired_ads()
+        query = "SELECT fechainicio, fechainicio, tipo, titulo, anuncio, detalles FROM product"
+        db_rows = self.run_query(query)
 
-    # Completar la función de actualización de contadores en JavaScript
-    js_update_counts += "}\n"
-    
-    # Crear el contenido de los anuncios
-    query = "SELECT fechainicio, fechainicio, tipo, titulo, anuncio, detalles FROM product"
-    db_rows = self.run_query(query)
+        # Crear el contenido de los anuncios y los tipos
+        ads_content = ""
+        job_types = {}
+        for row in db_rows:
+            ads_content += f"""
+            <div class="job {row[2]}">
+            <div class="job-header">
+            <h4>{row[3]}</h4>
+            <span class="job-date">Publicado: {row[0]}</span>
+            </div>
+            <p>{row[4]}</p>
+            <a href="{row[5]}" class="job-details">Ver detalles</a>
+            </div>
+            """
+            job_type = row[2]
+            if job_type in job_types:
+                job_types[job_type] += 1
+            else:
+                job_types[job_type] = 1
 
-    ads_content = ""
-    for row in db_rows:
-        ads_content += f"""
-        <div class="job {row[2]}">
-        <div class="job-header">
-        <h4>{row[3]}</h4>
-        <span class="job-date">Publicado: {row[0]}</span>
-        </div>
-        <p>{row[4]}</p>
-        <a href="{row[5]}" class="job-details">Ver detalles</a>
-        </div>
-        """
+        # Sobrescribir la sección de anuncios en el archivo HTML
+        HTML_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.html"
+        with open(HTML_FILE_PATH, "r+") as file:
+            content = file.read()
 
-    # Sobrescribir la sección de filtros y anuncios en el archivo HTML
-    HTML_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.html"
-    with open(HTML_FILE_PATH, "r+") as file:
-        content = file.read()
-        start_filter_marker = "<!-- inicio de filtros -->"
-        end_filter_marker = "<!-- fin de filtros -->"
-        start_ads_marker = "<!-- aquí deben introducirse los anuncios -->"
-        end_ads_marker = "<!-- fin de anuncios -->"
+            # Actualizar los filtros en el HTML
+            start_filters = "<!-- inicio de filtros -->"
+            end_filters = "<!-- fin de filtros -->"
+            filters_content = "<li><a href=\"#\" onclick=\"filterJobs('all')\">Todos <span id=\"all-count\"></span></a></li>\n"
+            for job_type, count in job_types.items():
+                filters_content += f"<li><a href=\"#\" onclick=\"filterJobs('{job_type}')\">{job_type.replace('_', ' ')} <span id=\"{job_type}-count\"></span></a></li>\n"
 
-        # Dividir el contenido en las partes necesarias
-        before_filters = content.split(start_filter_marker)[0]
-        after_filters = content.split(end_filter_marker)[1].split(start_ads_marker)[0]
-        after_ads = content.split(end_ads_marker)[1]
+            start_index_filters = content.find(start_filters) + len(start_filters)
+            end_index_filters = content.find(end_filters)
+            updated_content = content[:start_index_filters] + filters_content + content[end_index_filters:]
 
-        # Crear el nuevo contenido del archivo
-        new_content = f"{before_filters}{start_filter_marker}\n<ul>\n{filter_items}</ul>\n{end_filter_marker}\n{after_filters}{start_ads_marker}\n{ads_content}\n{end_ads_marker}{after_ads}"
+            # Actualizar los anuncios en el HTML
+            start_ads = "<!-- inicio de anuncios -->"
+            end_ads = "<!-- fin de anuncios -->"
 
-        # Escribir el nuevo contenido y truncar cualquier contenido sobrante
-        file.seek(0)
-        file.write(new_content)
-        file.truncate()
+            start_index_ads = updated_content.find(start_ads) + len(start_ads)
+            end_index_ads = updated_content.find(end_ads)
+            updated_content = updated_content[:start_index_ads] + ads_content + updated_content[end_index_ads:]
 
-    # Actualizar el JavaScript en el archivo
-    JS_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.js"
-    with open(JS_FILE_PATH, "r+") as js_file:
-        js_content = js_file.read()
-        start_js_marker = "function updateCounts() {"
-        end_js_marker = "}"
+            # Guardar cambios en el archivo
+            file.seek(0)
+            file.write(updated_content)
+            file.truncate()
 
-        # Dividir el contenido del JavaScript
-        before_js = js_content.split(start_js_marker)[0]
-        after_js = js_content.split(end_js_marker)[1]
+        # Guardar los cambios en el repositorio de Git
+        self.commit_to_git()
 
-        # Crear el nuevo contenido del archivo JS
-        new_js_content = f"{before_js}{js_update_counts}{after_js}"
-
-        # Escribir el nuevo contenido del archivo JS
-        js_file.seek(0)
-        js_file.write(new_js_content)
-        js_file.truncate()
-
-    # Automatización de Git
-    GIT_REPO_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama"
-    GIT_REMOTE_NAME = "origin"
-    GIT_BRANCH_NAME = "main"
-    repo = git.Repo(GIT_REPO_PATH)
-    repo.git.add(HTML_FILE_PATH)
-    repo.git.add(JS_FILE_PATH)
-    repo.index.commit("Actualización de anuncios y filtros desde la base de datos")
-    repo.git.push(GIT_REMOTE_NAME, GIT_BRANCH_NAME)
-
-    messagebox.showinfo("Éxito", "Archivo HTML y JavaScript actualizados exitosamente")
-
-
-
+    # Método para hacer commit al repositorio de Git
+    def commit_to_git(self):
+        repo_dir = '/home/gunnar/Documents/Tienda/tiendaivirgarzama'
+        repo = git.Repo(repo_dir)
+        repo.git.add(update=True)
+        commit_message = "Actualización automática de anuncios"
+        repo.index.commit(commit_message)
+        origin = repo.remote(name='origin')
+        origin.push()
 
 if __name__ == '__main__':
-    # Inicia la limpieza periódica en un hilo separado
     window = tk.Tk()
-    application = JobApp(window)
-    cleanup_thread = threading.Thread(target=application.schedule_cleanup)
+    app = JobApp(window)
+    cleanup_thread = threading.Thread(target=app.schedule_cleanup)
     cleanup_thread.daemon = True
     cleanup_thread.start()
-
-    # Inicializa la interfaz gráfica
     window.mainloop()
