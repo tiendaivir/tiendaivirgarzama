@@ -4,16 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function updateCounts() {
     const allJobs = document.querySelectorAll('.job').length;
-    const fulltimeJobs = document.querySelectorAll('.job.fulltime').length;
-    const parttimeJobs = document.querySelectorAll('.job.parttime').length;
-    const freelanceJobs = document.querySelectorAll('.job.freelance').length;
-    const albañilJobs = document.querySelectorAll('.job.albañil').length;
-  
     document.getElementById('all-count').textContent = `(${allJobs})`;
-    document.getElementById('fulltime-count').textContent = `(${fulltimeJobs})`;
-    document.getElementById('parttime-count').textContent = `(${parttimeJobs})`;
-    document.getElementById('freelance-count').textContent = `(${freelanceJobs})`;
-    document.getElementById('albañil-count').textContent = `(${albañilJobs})`;
+
+    // aquí se agregan los nuevos tipos
+const parttimeJobs = document.querySelectorAll('.job.parttime').length;
+document.getElementById('parttime-count').textContent = `(${parttimeJobs})`;
+const albañilJobs = document.querySelectorAll('.job.albañil').length;
+document.getElementById('albañil-count').textContent = `(${albañilJobs})`;
+const dfdJobs = document.querySelectorAll('.job.dfd').length;
+document.getElementById('dfd-count').textContent = `(${dfdJobs})`;
+const asi_es_loJobs = document.querySelectorAll('.job.asi_es_lo').length;
+document.getElementById('asi_es_lo-count').textContent = `(${asi_es_loJobs})`;
+// fin de los nuevos tipos
   }
   
   function filterJobs(type) {
