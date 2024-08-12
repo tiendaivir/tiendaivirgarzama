@@ -14,6 +14,8 @@ const dfdJobs = document.querySelectorAll('.job.dfd').length;
 document.getElementById('dfd-count').textContent = `(${dfdJobs})`;
 const asi_es_loJobs = document.querySelectorAll('.job.asi_es_lo').length;
 document.getElementById('asi_es_lo-count').textContent = `(${asi_es_loJobs})`;
+const esteJobs = document.querySelectorAll('.job.este').length;
+document.getElementById('este-count').textContent = `(${esteJobs})`;
 // fin de los nuevos tipos
   }
   
