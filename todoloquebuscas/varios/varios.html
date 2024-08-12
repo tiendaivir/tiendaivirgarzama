@@ -21,180 +21,83 @@
                 <h3>Tipo de Empleo</h3>
                 <ul>
                     <li><a href="#" onclick="filterJobs('all')">Todos <span id="all-count"></span></a></li>
-                    <li><a href="#" onclick="filterJobs('fulltime')">Tiempo Completo <span
-                                id="fulltime-count"></span></a></li>
-                    <li><a href="#" onclick="filterJobs('parttime')">Medio Tiempo <span id="parttime-count"></span></a>
-                    </li>
-                    <li><a href="#" onclick="filterJobs('freelance')">Freelance <span id="freelance-count"></span></a>
-                    </li>
-                    <li><a href="#" onclick="filterJobs('albañil')">Albañil <span id="albañil-count"></span></a></li>
+                   <!-- inicio de filtros -->
+<li><a href="#" onclick="filterJobs('all')">Todos <span id="all-count"></span></a></li>
+<li><a href="#" onclick="filterJobs('parttime')">parttime <span id="parttime-count"></span></a></li>
+<li><a href="#" onclick="filterJobs('albañil')">albañil <span id="albañil-count"></span></a></li>
+<li><a href="#" onclick="filterJobs('dfd')">dfd <span id="dfd-count"></span></a></li>
+<li><a href="#" onclick="filterJobs('asi_es_lo')">asi es lo <span id="asi_es_lo-count"></span></a></li>
+<!-- fin de filtros -->
                 </ul>
             </div>
         </aside>
         <div class="content">
-            <div class="job fulltime">
-                <div class="job-header">
-                    <h4>Desarrollador Web (Tiempo Completo)</h4>
-                    <span class="job-date">Publicado: 10/06/2024</span>
-                </div>
-                <p>Empresa: Tech Solutions</p>
-                <p>Ubicación: Remoto</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job fulltime">
-                <div class="job-header">
-                    <h4>Diseñador Gráfico (Tiempo Completo)</h4>
-                    <span class="job-date">Publicado: 09/06/2024</span>
-                </div>
-                <p>Empresa: Creative Minds</p>
-                <p>Ubicación: Madrid</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job parttime">
-                <div class="job-header">
-                    <h4>Asistente Administrativo (Medio Tiempo)</h4>
-                    <span class="job-date">Publicado: 08/06/2024</span>
-                </div>
-                <p>Empresa: Office Support</p>
-                <p>Ubicación: Barcelona</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job parttime">
-                <div class="job-header">
-                    <h4>Community Manager (Medio Tiempo)</h4>
-                    <span class="job-date">Publicado: 07/06/2024</span>
-                </div>
-                <p>Empresa: Social Media Co.</p>
-                <p>Ubicación: Valencia</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job freelance">
-                <div class="job-header">
-                    <h4>Redactor de Contenidos (Freelance)</h4>
-                    <span class="job-date">Publicado: 06/06/2024</span>
-                </div>
-                <p>Empresa: Content Creators</p>
-                <p>Ubicación: Remoto</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job freelance">
-                <div class="job-header">
-                    <h4>Consultor SEO (Freelance)</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Empresa: SEO Experts</p>
-                <p>Ubicación: Remoto</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
-            <div class="job albañil">
-                <div class="job-header">
-                    <h4>Albañil Maestro</h4>
-                    <span class="job-date">Publicado: 05/06/2024</span>
-                </div>
-                <p>Se busca albañil maestro y ayudantes</p>
-                <p>Ubicación: Av. Santa Cruz</p>
-                <a href="#" class="job-details">Ver detalles</a>
-            </div>
+            <!-- aquí deben introducirse los anuncios -->
 
+            <div class="job parttime">
+            <div class="job-header">
+            <h4>lknklnlkn</h4>
+            <span class="job-date">Publicado: 2024-08-11</span>
+            </div>
+            <p>kjnlknlk</p>
+            <a href="lkjnlkjnkln" class="job-details">Ver detalles</a>
+            </div>
+            
+            <div class="job albañil">
+            <div class="job-header">
+            <h4>2222222</h4>
+            <span class="job-date">Publicado: 2024-08-10</span>
+            </div>
+            <p>jvjhvjkhv</p>
+            <a href="jvjhvjhv" class="job-details">Ver detalles</a>
+            </div>
+            
+            <div class="job albañil">
+            <div class="job-header">
+            <h4>11111</h4>
+            <span class="job-date">Publicado: 2024-08-12</span>
+            </div>
+            <p>kjgcjkgcjgckjc</p>
+            <a href="kjcjcjgkc" class="job-details">Ver detalles</a>
+            </div>
+            
+            <div class="job albañil">
+            <div class="job-header">
+            <h4>55555</h4>
+            <span class="job-date">Publicado: 2024-08-05</span>
+            </div>
+            <p>khfkhfjhf</p>
+            <a href="kjhjcfkgjf" class="job-details">Ver detalles</a>
+            </div>
+            
+            <div class="job dfd">
+            <div class="job-header">
+            <h4>fsdgsd</h4>
+            <span class="job-date">Publicado: 2024-08-09</span>
+            </div>
+            <p>sdfsdf</p>
+            <a href="sdfdsf" class="job-details">Ver detalles</a>
+            </div>
+            
+            <div class="job asi_es_lo">
+            <div class="job-header">
+            <h4>55555</h4>
+            <span class="job-date">Publicado: 2024-08-10</span>
+            </div>
+            <p>jkhfjflkhf</p>
+            <a href="lkjfhkhf" class="job-details">Ver detalles</a>
+            </div>
+            
+            <div class="job albañil">
+            <div class="job-header">
+            <h4>dfgdfg</h4>
+            <span class="job-date">Publicado: 2024-08-09</span>
+            </div>
+            <p>dfgdfgdfg</p>
+            <a href="dfgfdg" class="job-details">Ver detalles</a>
+            </div>
+            
+<!-- fin de anuncios -->
             
         </div>
     </div>
