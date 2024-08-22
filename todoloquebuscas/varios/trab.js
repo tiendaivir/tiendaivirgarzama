@@ -6,15 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const allJobs = document.querySelectorAll('.job').length;
     document.getElementById('all-count').textContent = `(${allJobs})`;
      // aquí se agregan los nuevos tipos
-const parttimeJobs = document.querySelectorAll('.job.parttime').length;
-document.getElementById('parttime-count').textContent = `(${parttimeJobs})`;
-const albañilJobs = document.querySelectorAll('.job.albañil').length;
-document.getElementById('albañil-count').textContent = `(${albañilJobs})`;
-const dfdJobs = document.querySelectorAll('.job.dfd').length;
-document.getElementById('dfd-count').textContent = `(${dfdJobs})`;
-const asi_es_loJobs = document.querySelectorAll('.job.asi_es_lo').length;
-document.getElementById('asi_es_lo-count').textContent = `(${asi_es_loJobs})`;
-// fin de los nuevos tipos
+ 
+    // fin de los nuevos tipos
   }
   
   function filterJobs(type) {
@@ -68,4 +61,36 @@ document.getElementById('asi_es_lo-count').textContent = `(${asi_es_loJobs})`;
           filterToggle.style.display = 'block';
       }
   });
+    //header botom
+    const checkbox = document.getElementById('btn-menu');
+    const headerMidContainer = document.querySelector('.header-mid-container');
+    const menuIcon = document.querySelector('.menu-icon');
+    
+    document.addEventListener('click', function(event) {
+        // Si haces click fuera del contenedor o en el botón de menú
+        if (!headerMidContainer.contains(event.target) && !checkbox.contains(event.target)) {
+            checkbox.checked = false; // Repliega el menú
+        }
+    });
+    
+    menuIcon.addEventListener('click', function(event) {
+        // Si el menú está desplegado (checkbox marcado)
+        if (checkbox.checked) {
+            checkbox.checked = false; // Repliega el menú
+            event.preventDefault(); // Evita que el checkbox se vuelva a marcar
+        }
+    });
+    
+      /// botom base line
+    const currentPath = window.location.pathname.split('/').pop();
   
+    // Obtener todos los enlaces con la clase 'header-mid'
+    const navLinks = document.querySelectorAll('.header-mid');
+  
+    // Iterar sobre los enlaces y comparar la ruta href con la ruta actual
+    navLinks.forEach(link => {
+      const linkPath = link.getAttribute('href').split('/').pop();
+      if (linkPath === currentPath) {
+        link.classList.add('active');
+      }
+    });

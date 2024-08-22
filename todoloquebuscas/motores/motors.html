@@ -4,14 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filtros de Búsqueda</title>
+    <title>Motores Ivirgarzama</title>
     <link rel="stylesheet" href="trab.css">
+    <link rel="icon" href="../../imagenes/logpng.svg" type="image/svg+xml">
 </head>
 
 <body>
     <header>
         <a href="../../index.html" class="header-left">Ivirgarzama</a>
-        <span class="header-right">Portal Motores</span>
+        <input type="checkbox" id="btn-menu">
+        <label for="btn-menu" class="menu-icon">Menú</label>
+        <div class="header-mid-container">
+          <a href="../empleos/trab.html" class="header-mid">Empleos</a>
+          <a href="../inmuebles/inmuebles.html" class="header-mid">Inmuebles</a>
+          <a href="../motores/motors.html" class="header-mid">Automóviles</a>
+          <a href="../varios/varios.html" class="header-mid">Varios</a>
+        </div>
     </header>
     <button class="filter-toggle" id="filter-toggle">Tipo de Empleo</button>
     <div class="container">
@@ -21,83 +29,17 @@
                 <h3>Tipo de Empleo</h3>
                 <ul>
                     <li><a href="#" onclick="filterJobs('all')">Todos <span id="all-count"></span></a></li>
-                    <!-- inicio de filtros -->
-<li><a href="#" onclick="filterJobs('all')">Todos <span id="all-count"></span></a></li>
-<li><a href="#" onclick="filterJobs('parttime')">parttime <span id="parttime-count"></span></a></li>
-<li><a href="#" onclick="filterJobs('albañil')">albañil <span id="albañil-count"></span></a></li>
-<li><a href="#" onclick="filterJobs('dfd')">dfd <span id="dfd-count"></span></a></li>
-<li><a href="#" onclick="filterJobs('asi_es_lo')">asi es lo <span id="asi_es_lo-count"></span></a></li>
-<!-- fin de filtros -->
+                      <!-- inicio de filtros -->
+       
+                    <!-- fin de filtros -->
                 </ul>
             </div>
         </aside>
         <div class="content">
-        <!-- aquí deben introducirse los anuncios -->
-
-            <div class="job parttime">
-            <div class="job-header">
-            <h4>lknklnlkn</h4>
-            <span class="job-date">Publicado: 2024-08-11</span>
-            </div>
-            <p>kjnlknlk</p>
-            <a href="lkjnlkjnkln" class="job-details">Ver detalles</a>
-            </div>
+              <!-- aquí deben introducirse los anuncios -->
+           
+            <!-- fin de anuncios -->
             
-            <div class="job albañil">
-            <div class="job-header">
-            <h4>2222222</h4>
-            <span class="job-date">Publicado: 2024-08-10</span>
-            </div>
-            <p>jvjhvjkhv</p>
-            <a href="jvjhvjhv" class="job-details">Ver detalles</a>
-            </div>
-            
-            <div class="job albañil">
-            <div class="job-header">
-            <h4>11111</h4>
-            <span class="job-date">Publicado: 2024-08-12</span>
-            </div>
-            <p>kjgcjkgcjgckjc</p>
-            <a href="kjcjcjgkc" class="job-details">Ver detalles</a>
-            </div>
-            
-            <div class="job albañil">
-            <div class="job-header">
-            <h4>55555</h4>
-            <span class="job-date">Publicado: 2024-08-05</span>
-            </div>
-            <p>khfkhfjhf</p>
-            <a href="kjhjcfkgjf" class="job-details">Ver detalles</a>
-            </div>
-            
-            <div class="job dfd">
-            <div class="job-header">
-            <h4>fsdgsd</h4>
-            <span class="job-date">Publicado: 2024-08-09</span>
-            </div>
-            <p>sdfsdf</p>
-            <a href="sdfdsf" class="job-details">Ver detalles</a>
-            </div>
-            
-            <div class="job asi_es_lo">
-            <div class="job-header">
-            <h4>55555</h4>
-            <span class="job-date">Publicado: 2024-08-10</span>
-            </div>
-            <p>jkhfjflkhf</p>
-            <a href="lkjfhkhf" class="job-details">Ver detalles</a>
-            </div>
-            
-            <div class="job albañil">
-            <div class="job-header">
-            <h4>dfgdfg</h4>
-            <span class="job-date">Publicado: 2024-08-09</span>
-            </div>
-            <p>dfgdfgdfg</p>
-            <a href="dfgfdg" class="job-details">Ver detalles</a>
-            </div>
-            
-<!-- fin de anuncios -->
         </div>
     </div>
     <script src="trab.js"></script>
