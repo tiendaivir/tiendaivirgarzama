@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import messagebox, ttk, simpledialog
 import git
@@ -11,6 +12,14 @@ class JobApp:
     db_name = 'database.db'
 
     def __init__(self, window):
+        # Ruta base del proyecto (asumiendo que el archivo Python está dentro de la carpeta "tiendaivirgarzama")
+        self.base_path = os.path.dirname(os.path.abspath(__file__))
+
+        # Definir rutas relativas
+        self.HTML_FILE_PATH = os.path.join(self.base_path, "todoloquebuscas/empleos/trab.html")
+        self.JS_FILE_PATH = os.path.join(self.base_path, "todoloquebuscas/empleos/trab.js")
+        self.GIT_REPO_PATH = self.base_path
+
         # Initializations 
         self.wind = window
         self.wind.title('Administrador de Anuncios')
@@ -35,8 +44,6 @@ class JobApp:
         self.tipo = ttk.Combobox(frame, values=["parttime", "freelance", "albañil", "Agregar tipo..."], state="readonly")
         self.tipo.grid(row=3, column=1)
         self.tipo.bind("<<ComboboxSelected>>", self.on_type_selected)
-
-
 
         # Título del anuncio Input
         tk.Label(frame, text='Título del anuncio: ').grid(row=4, column=0)
@@ -179,12 +186,12 @@ class JobApp:
         for row in db_rows:
             ads_content += f"""
             <div class="job {row[2]}">
-            <div class="job-header">
-            <h4>{row[3]}</h4>
-            <span class="job-date">Publicado: {row[0]}</span>
-            </div>
-            <p>{row[4]}</p>
-            <a href="{row[5]}" class="job-details">Ver detalles</a>
+                <div class="job-header">
+                    <h4>{row[3]}</h4>
+                    <span class="job-date">Publicado: {row[0]}</span>
+                </div>
+                <p>{row[4]}</p>
+                <a href="{row[5]}" class="job-details">Ver detalles</a>
             </div>
             """
             job_type = row[2]
@@ -194,77 +201,54 @@ class JobApp:
                 job_types[job_type] = 1
 
         # Sobrescribir la sección de anuncios en el archivo HTML
-        HTML_FILE_PATH = "todoloquebuscas/empleos/trab.html"
-        with open(HTML_FILE_PATH, "r+") as file:
+        with open(self.HTML_FILE_PATH, "r+") as file:
             content = file.read()
 
             # Actualizar los filtros en el HTML
             start_filters = "<!-- inicio de filtros -->"
             end_filters = "<!-- fin de filtros -->"
-            filters_content = ""
+            filters_html = start_filters + "\n"
             for job_type, count in job_types.items():
-                filters_content += f"<li><a href=\"#\" onclick=\"filterJobs('{job_type}')\">{job_type.replace('_', ' ')} <span id=\"{job_type}-count\"></span></a></li>\n"
-            
-            # Reemplazar la sección de filtros
-            before_filters = content.split(start_filters)[0]
-            after_filters = content.split(end_filters)[1]
-            new_content = f"{before_filters}{start_filters}\n{filters_content}{end_filters}{after_filters}"
+                filters_html += f'<li class="filter-item" data-type="{job_type}">{job_type.capitalize()} ({count})</li>\n'
+            filters_html += end_filters
 
-            # Actualizar la sección de anuncios en el HTML
+            # Reemplazar los anuncios en el HTML
             start_marker = "<!-- aquí deben introducirse los anuncios -->"
             end_marker = "<!-- fin de anuncios -->"
-            before_ads = new_content.split(start_marker)[0]
-            after_ads = new_content.split(end_marker)[1]
-            final_content = f"{before_ads}{start_marker}\n{ads_content}\n{end_marker}{after_ads}"
+            ads_html = start_marker + "\n" + ads_content + "\n" + end_marker
+            updated_content = content.replace(content[content.index(start_marker):content.index(end_marker) + len(end_marker)], ads_html)
+            updated_content = updated_content.replace(content[content.index(start_filters):content.index(end_filters) + len(end_filters)], filters_html)
 
-            # Escribir el nuevo contenido y truncar cualquier contenido sobrante
+            # Escribir contenido actualizado
             file.seek(0)
-            file.write(final_content)
+            file.write(updated_content)
             file.truncate()
 
-        # Actualizar el JavaScript
-        JS_FILE_PATH = "todoloquebuscas/empleos/trab.js"
-        with open(JS_FILE_PATH, "r+") as file:
-            content = file.read()
+        # Actualizar el archivo JavaScript
+        with open(self.JS_FILE_PATH, "r+") as js_file:
+            js_content = js_file.read()
 
-            # Actualizar las cuentas en el JavaScript
-            start_js = "// aquí se agregan los nuevos tipos"
-            end_js = "// fin de los nuevos tipos"
-            js_content = ""
-            for job_type in job_types:
-                js_content += f"const {job_type}Jobs = document.querySelectorAll('.job.{job_type}').length;\n"
-                js_content += f"document.getElementById('{job_type}-count').textContent = `(${{{job_type}Jobs}})`;\n"
-            
-            # Reemplazar la sección de JavaScript dentro de `updateCounts`
-            before_js = content.split(start_js)[0]
-            after_js = content.split(end_js)[1]
-            new_js_content = f"{before_js}{start_js}\n{js_content}{end_js}{after_js}"
+            start_js_marker = "const filters = ["
+            end_js_marker = "];"
+            js_filters_content = start_js_marker + "\n"
+            js_filters_content += ",\n".join([f'"{job_type}"' for job_type in job_types.keys()])
+            js_filters_content += "\n" + end_js_marker
 
-            # Escribir el nuevo contenido y truncar cualquier contenido sobrante
-            file.seek(0)
-            file.write(new_js_content)
-            file.truncate()
+            updated_js_content = js_content.replace(js_content[js_content.index(start_js_marker):js_content.index(end_js_marker) + len(end_js_marker)], js_filters_content)
 
-        # Automatización de Git
-        GIT_REPO_PATH = "."
-        GIT_REMOTE_NAME = "origin"
-        GIT_BRANCH_NAME = "main"
-        repo = git.Repo(GIT_REPO_PATH)
-        repo.git.add(HTML_FILE_PATH)
-        repo.git.add(JS_FILE_PATH)
-        repo.index.commit("Actualización de anuncios y tipos desde la base de datos")
-        repo.git.push(GIT_REMOTE_NAME, GIT_BRANCH_NAME)
+            js_file.seek(0)
+            js_file.write(updated_js_content)
+            js_file.truncate()
 
-        messagebox.showinfo("Éxito", "Archivo HTML y JavaScript actualizados exitosamente")
+        self.message['text'] = 'Archivo HTML actualizado satisfactoriamente'
 
-
-
+    def start_background_tasks(self):
+        cleanup_thread = threading.Thread(target=self.schedule_cleanup)
+        cleanup_thread.daemon = True
+        cleanup_thread.start()
 
 if __name__ == '__main__':
-    # Inicia la limpieza periódica en un hilo separado
     window = tk.Tk()
-    application = JobApp(window)
-    cleanup_thread = threading.Thread(target=application.schedule_cleanup)
-    cleanup_thread.daemon = True
-    cleanup_thread.start()
+    app = JobApp(window)
+    app.start_background_tasks()
     window.mainloop()
