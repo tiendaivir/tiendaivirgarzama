@@ -257,9 +257,6 @@ class JobApp:
 
         messagebox.showinfo("Éxito", "Archivo HTML y JavaScript actualizados exitosamente")
 
-
-
-
 if __name__ == '__main__':
     # Inicia la limpieza periódica en un hilo separado
     window = tk.Tk()

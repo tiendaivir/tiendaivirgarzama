@@ -562,6 +562,15 @@ html {
         width: 100%;
     }
 }
+.external-link {
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.external-link:hover {
+  text-decoration: underline;
+}
 
 
 

@@ -7,7 +7,7 @@ import threading
 import time
 
 class JobApp:
-    db_name = 'database.db'  # Change this for each section
+    db_name = 'database.db' 
 
     def __init__(self, window):
         # Creating a Frame Container
@@ -197,7 +197,7 @@ class JobApp:
                 job_types[job_type] = 1
 
         # Sobrescribir la sección de anuncios en el archivo HTML
-        HTML_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.html"
+        HTML_FILE_PATH = "todoloquebuscas/empleos/trab.html"
         with open(HTML_FILE_PATH, "r") as file:
             content = file.read()
 
@@ -223,7 +223,7 @@ class JobApp:
             file.write(new_content)
 
         # Actualizar el JavaScript
-        JS_FILE_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama/todoloquebuscas/empleos/trab.js"
+        JS_FILE_PATH = "todoloquebuscas/empleos/trab.js"
         with open(JS_FILE_PATH, "r") as file:
             content = file.read()
 
@@ -243,7 +243,7 @@ class JobApp:
             file.write(new_js_content)
 
         # Automatización de Git
-        GIT_REPO_PATH = "/home/gunnar/Documents/Tienda/tiendaivirgarzama"
+        GIT_REPO_PATH = "."
         GIT_REMOTE_NAME = "origin"
         GIT_BRANCH_NAME = "main"
         repo = git.Repo(GIT_REPO_PATH)
