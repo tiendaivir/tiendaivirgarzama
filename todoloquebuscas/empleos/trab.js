@@ -6,8 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const allJobs = document.querySelectorAll('.job').length;
     document.getElementById('all-count').textContent = `(${allJobs})`;
      // aquí se agregan los nuevos tipos
+const este_es_un_nuevo_tipoJobs = document.querySelectorAll('.job.este_es_un_nuevo_tipo').length;
+document.getElementById('este_es_un_nuevo_tipo-count').textContent = `(${este_es_un_nuevo_tipoJobs})`;
 const albañilJobs = document.querySelectorAll('.job.albañil').length;
 document.getElementById('albañil-count').textContent = `(${albañilJobs})`;
+const freelanceJobs = document.querySelectorAll('.job.freelance').length;
+document.getElementById('freelance-count').textContent = `(${freelanceJobs})`;
 // fin de los nuevos tipos
   }
   
