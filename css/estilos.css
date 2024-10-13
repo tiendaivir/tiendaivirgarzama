@@ -5,7 +5,9 @@ html {
   body {
     font-size: 1.6rem;
     overflow-x: hidden;
-    background-color: #000;
+    background: #000000; 
+    background: -webkit-linear-gradient(to left, #000000, #0f9b0f, #000000); 
+    background: linear-gradient(to left, #000000, #095009, #000000);
     color: #fff;
     margin: 0;
     padding: 0;
