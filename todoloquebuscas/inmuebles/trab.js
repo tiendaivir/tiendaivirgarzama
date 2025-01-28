@@ -10,6 +10,8 @@ const Espacio_en_AlquilerJobs = document.querySelectorAll('.job.Espacio_en_Alqui
 document.getElementById('Espacio_en_Alquiler-count').textContent = `(${Espacio_en_AlquilerJobs})`;
 const CasaJobs = document.querySelectorAll('.job.Casa').length;
 document.getElementById('Casa-count').textContent = `(${CasaJobs})`;
+const LoteJobs = document.querySelectorAll('.job.Lote').length;
+document.getElementById('Lote-count').textContent = `(${LoteJobs})`;
 // fin de los nuevos tipos
   }
   
