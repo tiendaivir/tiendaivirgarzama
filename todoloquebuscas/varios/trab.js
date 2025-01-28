@@ -6,8 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const allJobs = document.querySelectorAll('.job').length;
     document.getElementById('all-count').textContent = `(${allJobs})`;
      // aquí se agregan los nuevos tipos
- 
-    // fin de los nuevos tipos
+const CursosJobs = document.querySelectorAll('.job.Cursos').length;
+document.getElementById('Cursos-count').textContent = `(${CursosJobs})`;
+const Materiales_de_construciónJobs = document.querySelectorAll('.job.Materiales_de_construción').length;
+document.getElementById('Materiales_de_construción-count').textContent = `(${Materiales_de_construciónJobs})`;
+const AnimalesJobs = document.querySelectorAll('.job.Animales').length;
+document.getElementById('Animales-count').textContent = `(${AnimalesJobs})`;
+const servicios_de_compañiaJobs = document.querySelectorAll('.job.servicios_de_compañia').length;
+document.getElementById('servicios_de_compañia-count').textContent = `(${servicios_de_compañiaJobs})`;
+// fin de los nuevos tipos
   }
   
   function filterJobs(type) {
