@@ -6,17 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const allJobs = document.querySelectorAll('.job').length;
     document.getElementById('all-count').textContent = `(${allJobs})`;
      // aquí se agregan los nuevos tipos
-<<<<<<< HEAD
-const Espacio_en_AlquilerJobs = document.querySelectorAll('.job.Espacio_en_Alquiler').length;
-document.getElementById('Espacio_en_Alquiler-count').textContent = `(${Espacio_en_AlquilerJobs})`;
 const CasaJobs = document.querySelectorAll('.job.Casa').length;
 document.getElementById('Casa-count').textContent = `(${CasaJobs})`;
 const LoteJobs = document.querySelectorAll('.job.Lote').length;
 document.getElementById('Lote-count').textContent = `(${LoteJobs})`;
-=======
-const bibiendsasJobs = document.querySelectorAll('.job.bibiendsas').length;
-document.getElementById('bibiendsas-count').textContent = `(${bibiendsasJobs})`;
->>>>>>> bf15a9e403627fc5326404ff8ba717f497d9bc5e
 // fin de los nuevos tipos
   }
   
