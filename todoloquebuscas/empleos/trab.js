@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const allJobs = document.querySelectorAll('.job').length;
     document.getElementById('all-count').textContent = `(${allJobs})`;
      // aquí se agregan los nuevos tipos
-const Salud-FarmaciaJobs = document.querySelectorAll('.job.Salud-Farmacia').length;
-document.getElementById('Salud-Farmacia-count').textContent = `(${Salud-FarmaciaJobs})`;
 const TécnicoJobs = document.querySelectorAll('.job.Técnico').length;
 document.getElementById('Técnico-count').textContent = `(${TécnicoJobs})`;
 const Personal_de_oficinaJobs = document.querySelectorAll('.job.Personal_de_oficina').length;
