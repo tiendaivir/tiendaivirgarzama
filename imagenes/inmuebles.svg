@@ -6,8 +6,8 @@
    viewBox="0 0 909 529.32087"
    version="1.1"
    id="svg50"
-   sodipodi:docname="undraw_ordinary_day_re_v5hy.svg"
-   inkscape:version="1.3 (1:1.3+202307231459+0e150ed6c4)"
+   sodipodi:docname="inmuebles.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,14 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="2.0318624"
-     inkscape:cx="188.7431"
-     inkscape:cy="424.73349"
-     inkscape:window-width="1294"
-     inkscape:window-height="704"
-     inkscape:window-x="72"
-     inkscape:window-y="27"
+     inkscape:cx="189.23526"
+     inkscape:cy="425.47172"
+     inkscape:window-width="1300"
+     inkscape:window-height="699"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg50" />
+     inkscape:current-layer="svg50"
+     showgrid="false" />
   <circle
      cx="248.18685"
      cy="402.13952"
@@ -150,11 +151,6 @@
      height="9.79261"
      fill="#cacaca"
      id="rect14" />
-  <path
-     d="M1053.5,714.66043h-907a1,1,0,0,1,0-2h907a1,1,0,0,1,0,2Z"
-     transform="translate(-145.5 -185.33957)"
-     fill="#3f3d56"
-     id="path14" />
   <path
      d="M813.48835,630.319l-.28231-3.51428c-.36586-1.37908-3.81017,2.94754-4.22114,3.0416a10.22236,10.22236,0,0,0-3.30859-.14891c.14749-6.30618-.82252-3.44705-3.63995-.60126-9.07787,4.60139-5.74873,19.13987,4.58718,19.21311C816.04832,648.85767,820.73664,636.04758,813.48835,630.319Z"
      transform="translate(-145.5 -185.33957)"
