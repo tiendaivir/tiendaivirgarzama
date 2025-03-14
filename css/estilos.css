@@ -53,6 +53,14 @@
   margin-bottom: 2rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
+@media (max-width: 768px) {
+  .slide-content h1{
+    font-size: 2rem;
+  }
+  .slide-content p{
+    font-size: 1rem;
+  }
+}
 
 
 .slide.active {
@@ -278,6 +286,14 @@
   padding: 5rem 2rem;
   background: #fff;
 }
+@media (max-width: 768px) {
+  .programs {
+      padding: 5rem 0; /* Eliminamos el relleno lateral en móviles */
+      margin: 0 auto; /* Centramos el contenedor horizontalmente en móviles */
+      max-width: 100%; /* Aseguramos que el ancho sea del 100% */
+  }
+}
+
 
 .cards-container {
   display: grid;
