@@ -71,34 +71,30 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="carousel">
-            <div class="slide active">
-                <div class="slide-content">
-                    <h1>Bienvenidos al Trópico</h1>
-                    <p>Naturaleza y paisajes inolvidables</p>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="slide-content">
-                    <h1>Vive la experiencia del Trópico</h1>
-                    <p>Emocionantes aventuras al aire libre</p>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="slide-content">
-                    <h1>Turismo en Ivirgarzama</h1>
-                    <p>Aventura, Ríos y Belleza Natural</p>
-                </div>
-            </div>
-        </div>
-        <div class="dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </section>
+    <!-- Sección Hero con Carrusel -->
+  <section class="hero-carousel" id="heroCarousel">
+    <!-- Las diapositivas se generarán con JavaScript -->
+    <div class="slides-container" id="slidesContainer"></div>
+    
+    <!-- Botones de navegación -->
+    <button class="nav-button prev-button" id="prevButton" aria-label="Slide anterior">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+    </button>
+    
+    <button class="nav-button next-button" id="nextButton" aria-label="Siguiente slide">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </button>
+    
+    <!-- Indicadores de slides -->
+    <div class="slide-indicators" id="slideIndicators"></div>
+  </section>
+  
+
+   <!--  seccio anuncios -->
     <section id="nuestros-programas">
         <div class="containercard">
             <h2>Anuncios Publicados</h2>
