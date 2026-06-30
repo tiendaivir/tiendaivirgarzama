@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const allJobs = document.querySelectorAll('.job').length;
     document.getElementById('all-count').textContent = `(${allJobs})`;
      // aquí se agregan los nuevos tipos
-const EducaciónJobs = document.querySelectorAll('.job.Educación').length;
-document.getElementById('Educación-count').textContent = `(${EducaciónJobs})`;
 // fin de los nuevos tipos
   }
   
